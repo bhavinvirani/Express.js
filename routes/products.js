@@ -12,20 +12,21 @@ router.get('/products', (req, res) => {
     });
 });
 
+// send data whene first time server start
 router.get("/api/products", (req, res) => { 
     res.send(products)
 });
 
-router.post("/api/products", apiKeyMiddleware,(req, res, next) => { 
+router.post("/api/products", apiKeyMiddleware, (req, res, next) => { 
 
     const {name, price}  = req.body;
     console.log(req.body);
 
     if(!name || !price){
 
-        next(ErrorHandler.validationError("Name and Price filds are required"));
-        // throw new Error("All fields are required")
-        // return res.status(422).json({error:"All fields are required"});
+        next(ErrorHandler.validationError("Name and Price filds are required"));  //? got to error handler
+        // throw new Error("All fields are required") //* catch in error handling middleware
+        // return res.status(422).json({error:"All fields are required"});    
         return;
     } 
     const newProduct = {
@@ -38,7 +39,7 @@ router.post("/api/products", apiKeyMiddleware,(req, res, next) => {
 })
 
 //* for Delete product
-router.delete("/api/products/:productId", apiKeyMiddleware,(req, res) => {
+router.delete("/api/products/:productId",(req, res) => {
     products = products.filter(product => req.params.productId !== product.id);
     res.json({status:"OK"});
 })

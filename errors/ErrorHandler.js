@@ -4,7 +4,8 @@ class ErrorHandler {
         this.status = status;
         this.message = message;
     }
-    
+
+    // 
     static notFoundError(message = 'Not found!') {
         return new ErrorHandler(404, message);
     }

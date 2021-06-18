@@ -1,9 +1,10 @@
+// TODO: React data
 const App = () => {
 
-    //* save products data
+    // //* save products data
     const [products, setProducts] = React.useState([]);
 
-    //* Helper to set individual input fild
+    // //* Helper to set individual input fild
     const [form, setForm] = React.useState({
         name: "",
         price: ""
@@ -16,12 +17,12 @@ const App = () => {
     async function fetchProducts() {
         //? calling ajex
         try {
-            const response = await fetch("api/products");
-            setProducts(await response.json());
+            const response = await fetch("api/products");   //? fetch data from this end point  (GET request)
+            setProducts(await response.json());             //? convert into json 
         } catch {
             console.log(error);
         }
-    }
+    };
     // function fetchProducts() {
     //     fetch('/api/products')
     //         .then((res) => res.json())
@@ -50,30 +51,30 @@ const App = () => {
             return;
         }
 
-        //TODO: fetch returns promise
+        //TODO: fetch returns promise  (POST request)
         fetch('/api/products', {
-            method: 'POST',
-            headers: {
+            method: 'POST',      //? method type
+            headers: {           //? content-type which we are sending to server
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(form)    //* send data to server in json format
+            body: JSON.stringify(form)        //? send data to server in json format
         })
-        .then(res => res.json())          //* response back from server after post request
-        .then(data => {
-            console.log(data);
-            fetchProducts();
-            setForm({ name: '', price: '' });
+            .then(res => res.json())          //? response back from server after post request
+            .then(data => {
+                console.log(data);   
+                fetchProducts();
+                setForm({ name: '', price: '' });
             })
     }
 
     const deleteProduct = (productId) => {
         fetch(`/api/products/${productId}`, {
             method: 'DELETE' // PUT , PATCH
-        }).then((res) => res.json())     
-          .then((data) => {
-            fetchProducts();
-            console.log(data)
-        }); 
+        }).then((res) => res.json())
+            .then((data) => {
+                fetchProducts();
+                console.log(data)
+            });
     }
 
 
@@ -82,7 +83,7 @@ const App = () => {
             <div className="card">
                 <div className="card-header">
                     Add a product
-                    </div>
+                </div>
                 <div className="card-body">
                     <form onClick={handleSubmit}>
                         <input type="text" value={form.name} onChange={() => updateForm(event, 'name')} placeholder="Product name" className="form-control mt-3" />
@@ -91,6 +92,7 @@ const App = () => {
                     </form>
                 </div>
             </div>
+
             <ul className="list-group mt-4">
                 {
                     products.map(product => {

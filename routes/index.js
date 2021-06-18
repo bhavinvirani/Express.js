@@ -18,9 +18,10 @@ router.get('/about', (req, res) => {
 })
 
 router.get('/download', (req, res) => {
-    res.download(path.resolve(__dirname) + '/about.html');
+    res.download(path.resolve(__dirname) + '/about.html');   //? send this file whene this request accure
 })
 
+//*? apiKeyMiddleware runs first whene request come to this route. 
 // router.get('/api/products', apiKeyMiddleware, (req, res) => {
 //     res.json([
 //         {
