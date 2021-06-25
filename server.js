@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
 
     console.error(err);
-
+    // next(ErrorHandler.validationError("Name and Price filds are required"));
     if (err instanceof ErrorHandler) {   //? error is object of ErrorHandler class
         res.status(err.status).json({
             error: {
