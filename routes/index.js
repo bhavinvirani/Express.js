@@ -1,5 +1,5 @@
 //TODO: contain all the routes
-
+const path = require("path")
 const router  = require('express').Router();
 const apiKeyMiddleware = require('../middleware/apiKey')
 
@@ -18,7 +18,7 @@ router.get('/about', (req, res) => {
 })
 
 router.get('/download', (req, res) => {
-    res.download(path.resolve(__dirname) + '/about.html');   //? send this file whene this request accure
+    res.download(path.resolve(__dirname) + '/products.js');   //? send this file whene this request accure
 })
 
 //*? apiKeyMiddleware runs first whene request come to this route. 

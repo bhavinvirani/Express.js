@@ -17,16 +17,16 @@ router.get("/api/products", (req, res) => {
     res.send(products)
 });
 
-router.post("/api/products", apiKeyMiddleware, (req, res, next) => { 
+router.post("/api/products",  apiKeyMiddleware,(req, res, next) => { 
 
     const {name, price}  = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     if(!name || !price){
 
         next(ErrorHandler.validationError("Name and Price filds are required"));  //? got to error handler
         // throw new Error("All fields are required") //* catch in error handling middleware
-        // return res.status(422).json({error:"All fields are required"});    
+        // return res.status(422).json({error:"All fields are required"});  //* hard coded 
         return;
     } 
     const newProduct = {

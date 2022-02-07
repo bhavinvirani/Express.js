@@ -5,7 +5,7 @@ class ErrorHandler {
         this.message = message;
     }
 
-    // 
+    // no need to make object for static method
     static notFoundError(message = 'Not found!') {
         return new ErrorHandler(404, message);
     }
@@ -22,6 +22,6 @@ class ErrorHandler {
         return new ErrorHandler(500, message);
     }
 
-}
+}[]
 
 module.exports = ErrorHandler;

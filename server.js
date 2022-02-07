@@ -1,9 +1,12 @@
 require('dotenv').config()
 const express = require('express');
 const path = require('path');
-const mainRouter = require('./routes/index')
 
+//* routers
+const mainRouter = require('./routes/index')
 const productRouter = require('./routes/products')
+
+//* error Handler
 const ErrorHandler = require('./errors/ErrorHandler');
 
 const app = express();
@@ -30,13 +33,13 @@ app.use(express.json());            //?
 //TODO: 
 //* set prefix of request. if prefix is matchd then go throw thise routs 
 app.use("/", mainRouter);           //* define routes  
-
 //TODO: Global middleware
 //* run on every incoming request
 app.use(productRouter);             
 
+//! Error Handling
 
-//* globle Middleware
+//* hard coded 
 app.use((req, res, next) => {
     return res.json({ message: "Page not found" });
 });
@@ -47,6 +50,7 @@ app.use((err, req, res, next) => {
 
     console.error(err);
     // next(ErrorHandler.validationError("Name and Price filds are required"));
+
     if (err instanceof ErrorHandler) {   //? error is object of ErrorHandler class
         res.status(err.status).json({
             error: {
@@ -62,7 +66,6 @@ app.use((err, req, res, next) => {
             }
         })
     }
-    // next();
 });
 
 
